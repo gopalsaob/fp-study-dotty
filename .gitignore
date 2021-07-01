@@ -1,0 +1,7 @@
+.idea/
+target/
+**/.DS_Store
+.bsp/
+project/target
+project/project/target
+csbt
