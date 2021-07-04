@@ -20,8 +20,6 @@ class ExamplesSpec extends AnyFreeSpec with Matchers {
 
     runExample("Intersection Types")(IntersectionTypes.test)
 
-    runExample("Type Lambda")(TypeLambdas.test)
-
     runExample("Multiversal Equality")(MultiversalEquality.test)
 
     runExample("Auto Param Tupling")(AutoParamTupling.test)

@@ -1,4 +1,4 @@
-name := "fp-study"
+name := "fp-study-dotty"
 version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "3.0.0"
