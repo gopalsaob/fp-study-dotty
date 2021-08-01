@@ -1,8 +1,8 @@
 //package sandbox.externalexercises.cooltaxi
 //
 //object CabService {
-//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel._
-//  import CabMorphisms._
+//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel.*
+//  import CabMorphisms.*
 //
 //  val MAX_DIST = 4.00
 //  val MAX_TIME_WAIT = 60

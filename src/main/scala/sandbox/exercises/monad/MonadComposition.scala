@@ -1,10 +1,10 @@
 package sandbox.exercises.monad
 
-//import cats.syntax.applicative._
+//import cats.syntax.applicative.*
 //import cats.FlatMap
 
-import cats.implicits._
-//import cats.syntax.monad._
+import cats.implicits.*
+//import cats.syntax.monad.*
 import cats.Monad
 
 object MonadComposition {

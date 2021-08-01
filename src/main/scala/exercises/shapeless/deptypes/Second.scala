@@ -15,8 +15,8 @@
 //}
 //
 //object SecondSugar {
-//  import Second._
-//  import shapeless._
+//  import Second.*
+//  import shapeless.*
 //
 //  implicit def hlistSecond[A, B, Rest <: HList]: Aux[A :: B :: Rest, B] =
 //    new Second[A :: B :: Rest] {

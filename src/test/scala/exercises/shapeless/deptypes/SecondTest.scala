@@ -1,11 +1,11 @@
 //package exercises.shapeless.deptypes
 //
-//import org.scalatest.freespec.AnyFreeSpec
+//import org.scalatest.freespec.AnyFreeSpecLike
 //import org.scalatest.matchers.should.Matchers
 //
-//class SecondTest extends AnyFreeSpec with Matchers {
-//  import shapeless._
-//  import SecondSugar._
+//class SecondTest extends AnyFreeSpecLike with Matchers {
+//  import shapeless.*
+//  import SecondSugar.*
 //
 //  "Second tests" in {
 //    val second1 = Second[String :: Boolean :: Int :: HNil]

@@ -7,7 +7,7 @@ object CatEqInstance {
   implicit val eqCat: Eq[Cat] = Eq.instance((c1, c2) => catsEquality(c1, c2))
 
   def catsEquality(c1: Cat, c2: Cat): Boolean = {
-    import cats.implicits._
+    import cats.implicits.*
 
     (c1.age === c2.age) && (c1.color === c2.color) && (c1.name === c2.name)
   }
@@ -26,7 +26,7 @@ object BEq {
 
     import cats.Eq
     implicit val eqListZ: Eq[List[z.type]] = Eq.fromUniversalEquals[List[z.type]]
-    import cats.syntax.eq._
+    import cats.syntax.eq.*
 
     l1 === l2
   }

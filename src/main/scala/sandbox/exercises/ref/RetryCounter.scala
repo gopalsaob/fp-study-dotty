@@ -2,7 +2,7 @@
 //
 ////import cats.effect.concurrent.Ref
 //
-//import scala.concurrent.duration._
+//import scala.concurrent.duration.*
 //import scala.concurrent.{Await, Future}
 //import scala.util.Try
 //

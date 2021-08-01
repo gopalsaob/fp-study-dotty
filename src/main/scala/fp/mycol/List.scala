@@ -87,7 +87,7 @@ object List {
 
   def apply[A](as: A*): List[A] = // Variadic function syntax
     if (as.isEmpty) Nil
-    else Cons(as.head, apply(as.tail: _*))
+    else Cons(as.head, apply(as.tail*))
 
   def tail[A](l: List[A]) =
     l match {

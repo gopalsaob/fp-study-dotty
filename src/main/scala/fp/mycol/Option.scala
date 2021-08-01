@@ -13,7 +13,7 @@ sealed trait Option[+A] {
       case Some(x) => x
     }
 
-  def flatMap[B](f: A => Option[B]): Option[B] =
+  infix def flatMap[B](f: A => Option[B]): Option[B] =
       map(f).getOrElse(None)
 //    this match {
 //      case None => None

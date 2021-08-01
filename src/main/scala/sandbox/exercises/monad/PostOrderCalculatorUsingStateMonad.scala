@@ -39,7 +39,7 @@ object PostOrderCalculatorUsingStateMonad {
   }
 
   def evalAll(input: List[String]): CalcState[Int] = {
-    import cats.syntax.applicative._
+    import cats.syntax.applicative.*
 
     input.foldLeft(0.pure[CalcState])((a, b) =>
       a.flatMap(_ => evalOne(b))

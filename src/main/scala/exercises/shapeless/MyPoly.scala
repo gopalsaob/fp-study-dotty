@@ -56,7 +56,7 @@
 //}
 //
 //
-//import MyTypeOperators._
+//import MyTypeOperators.*
 //
 //
 //

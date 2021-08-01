@@ -1,7 +1,7 @@
 package sandbox.exercises.functor
 
 import cats.Functor
-import cats.implicits._
+import cats.implicits.*
 
 object Functors {
 

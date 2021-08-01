@@ -17,7 +17,7 @@
 //}
 //
 //object MyHListMapperAux {
-//  import MyPoly._
+//  import MyPoly.*
 //
 //  implicit def hnilMapper1[HF] = new MyHListMapperAux[HF, MyHNil, MyHNil] {
 //    def apply(l : MyHNil) = MyHNil

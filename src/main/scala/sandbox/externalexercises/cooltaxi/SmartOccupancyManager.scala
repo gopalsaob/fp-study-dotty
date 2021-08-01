@@ -2,8 +2,8 @@
 //
 //object SmartOccupancyManager {
 //
-//  import CabService._
-//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel._
+//  import CabService.*
+//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel.*
 //
 //  /*  a non trivial process of fetching cabs from, say, in memory DB based on source and destination */
 //  val cabsFromDB = List[Cab]()

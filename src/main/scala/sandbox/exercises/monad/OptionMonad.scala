@@ -1,6 +1,6 @@
 package sandbox.exercises.monad
 
-import cats.{Monad => MonadC}
+import cats.{Monad as MonadC}
 
 object OptionMonad {
 

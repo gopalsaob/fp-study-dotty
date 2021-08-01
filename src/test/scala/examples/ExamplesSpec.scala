@@ -1,9 +1,9 @@
 package examples
 
-import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.freespec.AnyFreeSpecLike
 import org.scalatest.matchers.should.Matchers
 
-class ExamplesSpec extends AnyFreeSpec with Matchers {
+class ExamplesSpec extends AnyFreeSpecLike with Matchers {
 
   "Dotty Examples should work as expected" in {
     runExample("Trait Params")(TraitParams.test)

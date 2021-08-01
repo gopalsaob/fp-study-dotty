@@ -1,6 +1,6 @@
 //package sandbox.exercises.monad
 //
-//import cats.data._
+//import cats.data.*
 //
 //final case class Db(
 //                     usernames: Map[Int, String],
@@ -19,7 +19,7 @@
 //  )
 //
 //  def checkLogin(userId: Int, password: String): DbReader[Boolean] = {
-//    import cats.syntax.applicative._
+//    import cats.syntax.applicative.*
 //    findUserName(userId).flatMap(userNameOpt =>
 //      userNameOpt.map(un => checkPassword(un, password)).getOrElse(false.pure[DbReader]))
 //  }

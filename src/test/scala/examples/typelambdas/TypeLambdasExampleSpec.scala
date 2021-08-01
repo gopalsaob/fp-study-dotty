@@ -1,11 +1,11 @@
 package examples.typelambdas
 
-import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.freespec.AnyFreeSpecLike
 import cats.Functor
-import cats.implicits._
+import cats.implicits.*
 import org.scalatest.matchers.should.Matchers
 
-class TypeLambdasExampleSpec extends AnyFreeSpec with Matchers {
+class TypeLambdasExampleSpec extends AnyFreeSpecLike with Matchers {
 
   "TypeLambdas in Scala 2 and Scala 3 should be same" in {
     val m =
@@ -18,10 +18,10 @@ class TypeLambdasExampleSpec extends AnyFreeSpec with Matchers {
     val f = implicitly[Functor[MapInt]]
     val t = Example1.scala2[Map, Int, String](m, _.length, f)
     val t2 = Example1.scala3[Map, Int, String](m, _.length, f)
-    t2 should be (t)
+    t2.should(be (t))
   }
 
-  "Example2 should compile" in {
-    Example2.test() should be (())
+  "Example2.should(compile" in {
+    Example2.test().should(be (()))
   }
 }

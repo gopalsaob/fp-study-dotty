@@ -12,8 +12,8 @@ trait Invariant[F[_]] { self =>
    *
    * Example:
    * {{{
-   * scala> import cats.implicits._
-   * scala> import scala.concurrent.duration._
+   * scala> import cats.implicits.*
+   * scala> import scala.concurrent.duration.*
    * scala> val durSemigroup: Semigroup[FiniteDuration] =
    *      | Invariant[Semigroup].imap(Semigroup[Long])(Duration.fromNanos)(_.toNanos)
    * scala> durSemigroup.combine(2.seconds, 3.seconds)

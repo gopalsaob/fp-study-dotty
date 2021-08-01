@@ -1,16 +1,16 @@
 package exercises
 
-import org.scalatest._
-import freespec._
+import org.scalatest.*
+import freespec.*
 import matchers.should.Matchers
 
-class OrderingsSpec extends AnyFreeSpec with Matchers {
+class OrderingsSpec extends AnyFreeSpecLike with Matchers {
 
  "Orderings should work" in {
-//    import Orderings._
+//    import Orderings.*
 //    isLess(Nil)(List(1, 2, 3))
   val bool = true
-  bool should be (true)
+  bool.should(be (true))
  }
  
 }

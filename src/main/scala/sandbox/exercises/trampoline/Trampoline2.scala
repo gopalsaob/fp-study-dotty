@@ -1,7 +1,7 @@
 package sandbox.exercises.trampoline
 
 sealed trait Trampoline2[A] {
-  import Trampoline2._
+  import Trampoline2.*
   final def runT: A = {
     this match {
       case Done(result) => result

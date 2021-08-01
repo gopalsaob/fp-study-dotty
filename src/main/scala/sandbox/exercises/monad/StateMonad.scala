@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 
 object StateMonad {
   import cats.data.State
-  import State._
+  import State.*
 
   def program: State[Int, (Int, Int, Int)] =
     for {

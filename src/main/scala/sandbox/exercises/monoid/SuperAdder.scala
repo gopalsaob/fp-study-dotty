@@ -6,18 +6,18 @@ import sandbox.exercises.model.Order
 object SuperAdder {
 
   def add(items: List[Int]): Int = {
-    import cats.implicits._
+    import cats.implicits.*
     genericAdd(items)
   }
 
   def addOpt(items: List[Option[Int]]): Option[Int] = {
-    import cats.implicits._
+    import cats.implicits.*
     genericAdd(items)
   }
 
   def addOrders(items: List[Order]): Order = {
 //    https://github.com/typelevel/kittens/issues/209
-//    import cats.derived._
+//    import cats.derived.*
 //
 //    implicit val m: Monoid[Order] = semi.monoid[Order]
 //

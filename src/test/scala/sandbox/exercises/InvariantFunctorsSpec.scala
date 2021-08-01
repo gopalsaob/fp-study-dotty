@@ -1,11 +1,11 @@
 package sandbox.exercises
 
-import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.freespec.AnyFreeSpecLike
 import org.scalatest.matchers.should.Matchers
 import sandbox.exercises.functor.Codec
 import sandbox.exercises.testdata.Box
 
-class InvariantFunctorsSpec extends AnyFreeSpec with Matchers {
+class InvariantFunctorsSpec extends AnyFreeSpecLike with Matchers {
 
   implicit val stringCodec: Codec[String] = new Codec[String] {
     override def encode(value: String): String = value
@@ -19,25 +19,25 @@ class InvariantFunctorsSpec extends AnyFreeSpec with Matchers {
     stringCodec.imap[Box[A]](x => Box(valueCodec.decode(x)), x => valueCodec.encode(x.value) )
 
   "Codec instances should work" in {
-    import sandbox.exercises.functor.Codec._
+    import sandbox.exercises.functor.Codec.*
 
-    encode(123.4) should be ("123.4")
-    decode[Double]("123.4") should be (123.4)
-    encode(Box(123.4)) should be ("123.4")
-    decode[Box[Double]]("123.4") should be (Box(123.4))
+    encode(123.4).should(be ("123.4"))
+    decode[Double]("123.4").should(be (123.4))
+    encode(Box(123.4)).should(be ("123.4"))
+    decode[Box[Double]]("123.4").should(be (Box(123.4)))
   }
 
   "Using cats, create Monoid of Symbol" in {
     import cats.Monoid
     import cats.Invariant
-    import cats.instances.string._ // For Monoid
-//    import cats.syntax.invariant._ // Extension method For imap
-    import cats.syntax.semigroup._ // For |+|
+    import cats.instances.string.* // For Monoid
+//    import cats.syntax.invariant.* // Extension method For imap
+    import cats.syntax.semigroup.* // For |+|
 
     implicit val symbolMonoid: Monoid[Symbol] = Invariant[Monoid].imap(Monoid[String])(Symbol.apply)(_.name)
 //    implicit val symbolMonoid: Monoid[Symbol] = Monoid[String].imap(Symbol.apply)(_.name)
 
-    (Symbol("a") |+| Symbol("few") |+| Symbol("words")).name should be ("afewwords")
+    (Symbol("a") |+| Symbol("few") |+| Symbol("words")).name.should(be ("afewwords"))
   }
 
 }
