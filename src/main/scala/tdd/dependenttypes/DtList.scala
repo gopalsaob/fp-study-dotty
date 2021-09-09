@@ -9,3 +9,4 @@ sealed trait DTList[N <: Int]:
 
 case object DTNil extends DTList[0]
 case class DTNonEmptyList[N <: Int, H, T <: DTList[N]](head: H, tail: T) extends DTList[S[N]]
+
