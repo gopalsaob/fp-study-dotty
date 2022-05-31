@@ -93,15 +93,15 @@ class FunctorsSpec extends AnyFreeSpecLike with Matchers {
     val o1: Q[String] = Good("Hello")
     val o2: Q[String] = Bad(One("BadMessage"))
 
-    o1.fmap(_.length).should(be (Good(5)))
-    o2.fmap(_.length).should(be (Bad(One("BadMessage"))))
+    functorQ.fmap(o1)(_.length).should(be (Good(5)))
+    functorQ.fmap(o2)(_.length).should(be (Bad(One("BadMessage"))))
   }
 
   "Functor Impl for Scalactic Or with bad mapping" in {
     import cats.Functor
-    import cats.syntax.functor.*
+    import cats.syntax.all
     import org.scalactic.*
-
+    
     type F[A] = Or[?, A]
 
     implicit val functorF: Functor[F] = new Functor[F] {
@@ -111,8 +111,11 @@ class FunctorsSpec extends AnyFreeSpecLike with Matchers {
     val o1: F[Every[String]] = Good("Hello")
     val o2: F[Every[String]] = Bad(One("BadMessage"))
 
-    o1.fmap(_.map(_.length)).should(be (Good("Hello")))
-    o2.fmap(_.map(_.length)).should(be (Bad(One(10))))
+    //    o1.fmap(_.map(_.length)).should(be (Good("Hello"))) // Doesn't work -> Some regression or feature change in latest version of cats
+    functorF.fmap(o1)(_.map(_.length)).should(be (Good("Hello")))
+    //    o2.fmap(_.map(_.length)).should(be (Bad(One(10))))
+    functorF.fmap(o2)(_.map(_.length)).should(be (Bad(One(10))))
+
   }
 
   "partial unification should not work for ContravariantFunctor which needs to fix Right type parameter" in {
