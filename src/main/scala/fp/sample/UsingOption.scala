@@ -1,6 +1,6 @@
 package fp.sample
 
-import fp.mycol._
+import fp.mycol.*
 
 class UsingOption {
 

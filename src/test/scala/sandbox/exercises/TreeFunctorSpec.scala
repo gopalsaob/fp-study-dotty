@@ -1,15 +1,14 @@
 package sandbox.exercises
 
-import org.scalatest.freespec.AnyFreeSpec
+import cats.syntax.functor.*
+import org.scalatest.freespec.AnyFreeSpecLike
 import org.scalatest.matchers.should.Matchers
+import sandbox.exercises.functor.Tree.*
 
-import cats.syntax.functor._
-import sandbox.exercises.functor.Tree._
-
-class TreeFunctorSpec extends AnyFreeSpec with Matchers {
+class TreeFunctorSpec extends AnyFreeSpecLike with Matchers {
 
   "TreeFunctor should work" in {
-    branch(leaf(10), leaf(20)).map(_ * 2) should be ( branch(leaf(20), leaf(40)))
+    branch(leaf(10), leaf(20)).map(_ * 2).should(be(branch(leaf(20), leaf(40))))
   }
 
 }

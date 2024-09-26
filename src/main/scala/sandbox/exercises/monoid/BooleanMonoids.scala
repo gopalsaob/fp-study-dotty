@@ -11,12 +11,12 @@ object Monoid {
 }
 
 /**
-  * | x | y | result |
-  * | F | F |  F     |
-  * | F | T |  T     |
-  * | T | F |  T     |
-  * | T | T |  T     |
-  */
+ * | x | y | result |
+ * | F | F |  F     |
+ * | F | T |  T     |
+ * | T | F |  T     |
+ * | T | T |  T     |
+ */
 object Or extends Monoid[Boolean] {
 
   override def combine(x: Boolean, y: Boolean): Boolean = x || y
@@ -25,12 +25,12 @@ object Or extends Monoid[Boolean] {
 }
 
 /**
-  * | x | y | result |
-  * | F | F |  F     |
-  * | F | T |  F     |
-  * | T | F |  F     |
-  * | T | T |  T     |
-  */
+ * | x | y | result |
+ * | F | F |  F     |
+ * | F | T |  F     |
+ * | T | F |  F     |
+ * | T | T |  T     |
+ */
 object And extends Monoid[Boolean] {
 
   override def combine(x: Boolean, y: Boolean): Boolean = x && y
@@ -39,12 +39,12 @@ object And extends Monoid[Boolean] {
 }
 
 /**
-  * | x | y | result |
-  * | F | F |  F     |
-  * | F | T |  T     |
-  * | T | F |  T     |
-  * | T | T |  F     |
-  */
+ * | x | y | result |
+ * | F | F |  F     |
+ * | F | T |  T     |
+ * | T | F |  T     |
+ * | T | T |  F     |
+ */
 object XOr extends Monoid[Boolean] {
   override def empty: Boolean = false
 
@@ -53,12 +53,12 @@ object XOr extends Monoid[Boolean] {
 }
 
 /**
-  * | x | y | result |
-  * | F | F |  T     |
-  * | F | T |  F     |
-  * | T | F |  F     |
-  * | T | T |  T     |
-  */
+ * | x | y | result |
+ * | F | F |  T     |
+ * | F | T |  F     |
+ * | T | F |  F     |
+ * | T | T |  T     |
+ */
 object XNor extends Monoid[Boolean] {
   override def empty: Boolean = true
 

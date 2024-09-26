@@ -13,7 +13,7 @@ trait Functor[F[_]] extends Invariant[F] { self =>
    *
    * Example:
    * {{{
-   * scala> import cats.implicits._
+   * scala> import cats.implicits.*
    *
    * scala> val m: Map[Int, String] = Map(1 -> "hi", 2 -> "there", 3 -> "you")
    *
@@ -147,7 +147,6 @@ trait Functor[F[_]] extends Invariant[F] { self =>
    * scala> Functor[List].unzip(List((1,2), (3, 4)))
    * res0: (List[Int], List[Int]) = (List(1, 3),List(2, 4))
    * }}}
-   *
    */
   def unzip[A, B](fab: F[(A, B)]): (F[A], F[B]) = (map(fab)(_._1), map(fab)(_._2))
 
@@ -180,24 +179,24 @@ trait Functor[F[_]] extends Invariant[F] { self =>
 
 object Functor extends scala.AnyRef with java.io.Serializable {
   @scala.inline
-  def apply[F[_]](implicit instance : Functor[F]) : Functor[F] = instance
+  def apply[F[_]](implicit instance: Functor[F]): Functor[F] = instance
   trait Ops[F[_], A] {
     def typeClassInstance: Functor[F]
-    def self : F[A]
-    def map[B](f: A => B) : F[B] = typeClassInstance.map(self)(f)
-    def fmap[B](f: A => B) : F[B] = typeClassInstance.fmap(self)(f)
-    def widen[B >: A]: F[B] = typeClassInstance.widen(self)
-    def void : F[Unit] = typeClassInstance.void(self)
+    def self: F[A]
+    def map[B](f: A => B): F[B]           = typeClassInstance.map(self)(f)
+    def fmap[B](f: A => B): F[B]          = typeClassInstance.fmap(self)(f)
+    def widen[B >: A]: F[B]               = typeClassInstance.widen(self)
+    def void: F[Unit]                     = typeClassInstance.void(self)
     def fproduct[B](f: A => B): F[(A, B)] = typeClassInstance.fproduct(self)(f)
-    def as[B](b : B): F[B] = typeClassInstance.as(self, b)
-    def tupleLeft[B](b : B): F[(B, A)] = typeClassInstance.tupleLeft(self, b)
-    def tupleRight[B](b : B): F[(A, B)] = typeClassInstance.tupleRight(self, b)
+    def as[B](b: B): F[B]                 = typeClassInstance.as(self, b)
+    def tupleLeft[B](b: B): F[(B, A)]     = typeClassInstance.tupleLeft(self, b)
+    def tupleRight[B](b: B): F[(A, B)]    = typeClassInstance.tupleRight(self, b)
   }
 
   trait ToFunctorOps {
-    implicit def toFunctorOps[F[_], A](target : F[A])(implicit tc : Functor[F]): Ops[F, A] =
+    implicit def toFunctorOps[F[_], A](target: F[A])(implicit tc: Functor[F]): Ops[F, A] =
       new Ops[F, A] {
-        val self = target
+        val self              = target
         val typeClassInstance = tc
       }
   }
@@ -211,7 +210,7 @@ object Functor extends scala.AnyRef with java.io.Serializable {
   object ops {
     implicit def toAllFunctorOps[F[_], A](target: F[A])(implicit tc: Functor[F]): AllOps[F, A] =
       new AllOps[F, A] {
-        val self = target
+        val self              = target
         val typeClassInstance = tc
       }
   }

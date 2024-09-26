@@ -1,7 +1,7 @@
 package sandbox
 
-import cats.instances.string._
-import cats.syntax.semigroup._
+import cats.instances.string.*
+import cats.syntax.semigroup.*
 
 object Main extends App {
   println("Hello " |+| "Cats!")

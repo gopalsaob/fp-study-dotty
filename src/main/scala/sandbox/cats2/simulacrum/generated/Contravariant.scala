@@ -46,15 +46,15 @@ object Contravariant {
 
   trait Ops[F[_], A] {
     def typeClassInstance: Contravariant[F]
-    def self : F[A]
-    def contramap[B](f: B => A) : F[B] = typeClassInstance.contramap(self)(f)
-    def narrow[B <: A]: F[B] = typeClassInstance.narrow(self)
+    def self: F[A]
+    def contramap[B](f: B => A): F[B] = typeClassInstance.contramap(self)(f)
+    def narrow[B <: A]: F[B]          = typeClassInstance.narrow(self)
   }
 
   trait ToContravariantOps {
-    implicit def toContravariantOps[F[_], A](target : F[A])(implicit tc : Contravariant[F]): Ops[F, A] =
+    implicit def toContravariantOps[F[_], A](target: F[A])(implicit tc: Contravariant[F]): Ops[F, A] =
       new Ops[F, A] {
-        val self: F[A] = target
+        val self: F[A]        = target
         val typeClassInstance = tc
       }
   }
@@ -64,9 +64,11 @@ object Contravariant {
     def typeClassInstance: Contravariant[F]
   }
   object ops {
-    implicit def toAllContravariantOps[F[_], A](target : F[A])(implicit tc: Contravariant[F]): Contravariant.AllOps[F, A] =
+    implicit def toAllContravariantOps[F[_], A](
+        target: F[A]
+    )(implicit tc: Contravariant[F]): Contravariant.AllOps[F, A] =
       new AllOps[F, A] {
-        val self = target
+        val self              = target
         val typeClassInstance = tc
       }
   }

@@ -2,7 +2,6 @@ package sandbox.exercises.monoid
 
 object IntMonoid {
 
-
   object Add extends Monoid[Int] {
 
     override def combine(x: Int, y: Int): Int = x + y

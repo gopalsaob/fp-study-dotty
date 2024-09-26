@@ -1,11 +1,11 @@
 package sandbox.exercises
 
-import org.scalatest.freespec.AnyFreeSpec
-import sandbox.exercises.typeclasses.PrintableSyntax._
+import org.scalatest.freespec.AnyFreeSpecLike
 import org.scalatest.matchers.should.Matchers
 import sandbox.exercises.typeclasses.{Cat, Printable}
+import sandbox.exercises.typeclasses.PrintableSyntax.*
 
-class CatPrintableTypeclassInstanceSpec extends AnyFreeSpec with Matchers {
+class CatPrintableTypeclassInstanceSpec extends AnyFreeSpecLike with Matchers {
 
   "short demo app" in {
     val demoCat = Cat("Foo", 5, "Black")
@@ -17,7 +17,7 @@ class CatPrintableTypeclassInstanceSpec extends AnyFreeSpec with Matchers {
   }
 
   "cats Show" in {
-    import cats.implicits._
+    import cats.implicits.*
 
     println("Foo".show)
   }

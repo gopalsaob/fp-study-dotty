@@ -1,11 +1,11 @@
 package sandbox.exercises.monad
 
-//import cats.syntax.applicative._
+//import cats.syntax.applicative.*
 //import cats.FlatMap
 
-import cats.implicits._
-//import cats.syntax.monad._
+//import cats.syntax.monad.*
 import cats.Monad
+import cats.implicits.*
 
 object MonadComposition {
 
@@ -15,9 +15,8 @@ object MonadComposition {
     new Monad[Composed] {
       override def pure[A](x: A): Composed[A] = x.pure[M2].pure[M1]
 
-      override def flatMap[A, B](fa: Composed[A])(f: A => Composed[B]): Composed[B] = {
+      override def flatMap[A, B](fa: Composed[A])(f: A => Composed[B]): Composed[B] =
         ???
-      }
 
       override def tailRecM[A, B](a: A)(f: A => Composed[Either[A, B]]): Composed[B] = ???
     }
@@ -34,7 +33,7 @@ object MonadComposition2 {
       override def flatMap[A, B](fa: Composed[A])(f: A => Composed[B]): Composed[B] = {
         val t = implicitly[Monad[M1]]
         t.flatMap(fa) {
-          case None => t.pure(Option.empty[B])
+          case None    => t.pure(Option.empty[B])
           case Some(a) => f(a)
         }
       }

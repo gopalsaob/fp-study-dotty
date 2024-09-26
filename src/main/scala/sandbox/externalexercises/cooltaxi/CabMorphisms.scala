@@ -1,7 +1,7 @@
 //package sandbox.externalexercises.cooltaxi
 //
 //object CabMorphisms {
-//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel._
+//  import sandbox.externalexercises.cooltaxi.CoolTaxiModel.*
 //
 //  sealed trait CabMorphism {
 //    def m: Function1[List[Cab], List[Cab]]

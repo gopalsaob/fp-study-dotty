@@ -1,7 +1,7 @@
 package sandbox.cats2.simulacrum.generated
 
-import cats.kernel.{Band, BoundedSemilattice, CommutativeGroup, CommutativeMonoid, Semilattice}
 import cats.{Group, Monoid}
+import cats.kernel.{Band, BoundedSemilattice, CommutativeGroup, CommutativeMonoid, Semilattice}
 import scalaVersionSpecific.suppressUnusedImportWarningForScalaVersionSpecific
 
 trait Invariant[F[_]] { self =>
@@ -12,8 +12,8 @@ trait Invariant[F[_]] { self =>
    *
    * Example:
    * {{{
-   * scala> import cats.implicits._
-   * scala> import scala.concurrent.duration._
+   * scala> import cats.implicits.*
+   * scala> import scala.concurrent.duration.*
    * scala> val durSemigroup: Semigroup[FiniteDuration] =
    *      | Invariant[Semigroup].imap(Semigroup[Long])(Duration.fromNanos)(_.toNanos)
    * scala> durSemigroup.combine(2.seconds, 3.seconds)
@@ -65,7 +65,6 @@ trait ComposedInvariantContravariant[F[_], G[_]] extends Invariant[λ[α => F[G[
     F.imap(fga)(ga => G.contramap(ga)(g))(gb => G.contramap(gb)(f))
 }
 
-
 trait ComposedInvariant[F[_], G[_]] extends Invariant[λ[α => F[G[α]]]] { outer =>
   def F: Invariant[F]
   def G: Invariant[G]
@@ -87,8 +86,8 @@ object Invariant {
   implicit val catsInvariantMonoid: Invariant[Monoid] = new Invariant[Monoid] {
 
     def imap[A, B](fa: Monoid[A])(f: A => B)(g: B => A): Monoid[B] = new Monoid[B] {
-      val empty = f(fa.empty)
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
+      val empty                                                     = f(fa.empty)
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -98,7 +97,7 @@ object Invariant {
   implicit val catsInvariantBand: Invariant[Band] = new Invariant[Band] {
 
     def imap[A, B](fa: Band[A])(f: A => B)(g: B => A): Band[B] = new Band[B] {
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -107,7 +106,7 @@ object Invariant {
   implicit val catsInvariantSemilattice: Invariant[Semilattice] = new Invariant[Semilattice] {
 
     def imap[A, B](fa: Semilattice[A])(f: A => B)(g: B => A): Semilattice[B] = new Semilattice[B] {
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -117,8 +116,8 @@ object Invariant {
   implicit val catsInvariantCommutativeMonoid: Invariant[CommutativeMonoid] = new Invariant[CommutativeMonoid] {
 
     def imap[A, B](fa: CommutativeMonoid[A])(f: A => B)(g: B => A): CommutativeMonoid[B] = new CommutativeMonoid[B] {
-      val empty = f(fa.empty)
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
+      val empty                                                     = f(fa.empty)
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -128,8 +127,8 @@ object Invariant {
   implicit val catsInvariantBoundedSemilattice: Invariant[BoundedSemilattice] = new Invariant[BoundedSemilattice] {
 
     def imap[A, B](fa: BoundedSemilattice[A])(f: A => B)(g: B => A): BoundedSemilattice[B] = new BoundedSemilattice[B] {
-      val empty = f(fa.empty)
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
+      val empty                                                     = f(fa.empty)
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -139,9 +138,9 @@ object Invariant {
   implicit val catsInvariantGroup: Invariant[Group] = new Invariant[Group] {
 
     def imap[A, B](fa: Group[A])(f: A => B)(g: B => A): Group[B] = new Group[B] {
-      val empty = f(fa.empty)
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
-      def inverse(b: B): B = f(fa.inverse(g(b)))
+      val empty                                                     = f(fa.empty)
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
+      def inverse(b: B): B                                          = f(fa.inverse(g(b)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
@@ -151,27 +150,27 @@ object Invariant {
   implicit val catsInvariantCommutativeGroup: Invariant[CommutativeGroup] = new Invariant[CommutativeGroup] {
 
     def imap[A, B](fa: CommutativeGroup[A])(f: A => B)(g: B => A): CommutativeGroup[B] = new CommutativeGroup[B] {
-      val empty = f(fa.empty)
-      def combine(x: B, y: B): B = f(fa.combine(g(x), g(y)))
-      def inverse(b: B): B = f(fa.inverse(g(b)))
+      val empty                                                     = f(fa.empty)
+      def combine(x: B, y: B): B                                    = f(fa.combine(g(x), g(y)))
+      def inverse(b: B): B                                          = f(fa.inverse(g(b)))
       override def combineAllOption(bs: IterableOnce[B]): Option[B] =
         fa.combineAllOption(bs.iterator.map(g)).map(f)
     }
 
   }
 
-  def apply[F[_]](implicit instance : Invariant[F]) : Invariant[F] = instance
+  def apply[F[_]](implicit instance: Invariant[F]): Invariant[F] = instance
 
   trait Ops[F[_], A] {
     def typeClassInstance: Invariant[F]
     def self: F[A]
-    def imap[B](f: A => B)(g: B => A) : F[B] = typeClassInstance.imap(self)(f)(g)
+    def imap[B](f: A => B)(g: B => A): F[B] = typeClassInstance.imap(self)(f)(g)
   }
 
   trait ToInvariantOps {
-    implicit def toInvariantOps[F[_], A](target : F[A])(implicit tc: Invariant[F]): Ops[F, A] =
+    implicit def toInvariantOps[F[_], A](target: F[A])(implicit tc: Invariant[F]): Ops[F, A] =
       new Ops[F, A] {
-        val self = target
+        val self              = target
         val typeClassInstance = tc
       }
   }
@@ -181,11 +180,10 @@ object Invariant {
     def typeClassInstance: Invariant[F]
   }
   object ops {
-    implicit def toAllInvariantOps[F[_], A](target : F[A])(implicit tc: Invariant[F]): AllOps[F, A]  =
+    implicit def toAllInvariantOps[F[_], A](target: F[A])(implicit tc: Invariant[F]): AllOps[F, A] =
       new AllOps[F, A] {
-        val self = target
+        val self              = target
         val typeClassInstance = tc
       }
   }
 }
-

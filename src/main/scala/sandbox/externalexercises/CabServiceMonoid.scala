@@ -1,7 +1,3 @@
 package sandbox.externalexercises
 
-class CabServiceMonoid {
-
-}
-
-
+class CabServiceMonoid {}

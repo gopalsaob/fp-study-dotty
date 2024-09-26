@@ -7,6 +7,4 @@ object MonadTransformerExample {
 
 }
 
-class OptionTImpl[F[_]: Monad, A] {
-
-}
+class OptionTImpl[F[_]: Monad, A] {}

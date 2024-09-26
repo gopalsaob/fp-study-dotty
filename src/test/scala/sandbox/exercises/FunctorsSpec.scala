@@ -1,24 +1,24 @@
 package sandbox.exercises
 
-import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.freespec.AnyFreeSpecLike
 import org.scalatest.matchers.should.Matchers
 import sandbox.exercises.functor.Functors
 
-class FunctorsSpec extends AnyFreeSpec with Matchers {
+class FunctorsSpec extends AnyFreeSpecLike with Matchers {
 
   "Functors.doMath should work for options" in {
-    import cats.instances.option._
-    Functors.doMath(Option(20)) should be (Option(22))
+    import cats.instances.option.*
+    Functors.doMath(Option(20)).should(be(Option(22)))
   }
 
   "Functors.doMath should work for lists" in {
-    import cats.instances.list._
-    Functors.doMath(List(1, 2, 3)) should be (List(3, 4, 5))
+    import cats.instances.list.*
+    Functors.doMath(List(1, 2, 3)).should(be(List(3, 4, 5)))
   }
 
   "Function1.map using cats Functor created explicitly" in {
     import cats.Functor
-    import cats.instances.function._
+    import cats.instances.function.*
 
     val func1 = (x: Int) => x.toDouble
     type F[A] = Int => A // partial unification, automatically done (left to right by compiler after SI-2712
@@ -56,35 +56,34 @@ class FunctorsSpec extends AnyFreeSpec with Matchers {
      */
 
     val func3 = Functor[F].map(func1)(func2)
-    func3(2) should be (4.0)
+    func3(2).should(be(4.0))
   }
 
   "cats Function1 Functor with partial unification should work in Scala 2.13+" in {
-    import cats.instances.function._ // for Functor
-    import cats.syntax.functor._ // extension method for map
+    import cats.instances.function.* // for Functor
+    import cats.syntax.functor.*     // extension method for map
 
     val func1 = (x: Int) => x.toDouble
     val func2 = (y: Double) => y * 2
     val func3 = func1.map(func2)
-    func3(2) should be (4.0)
+    func3(2).should(be(4.0))
   }
 
-  "cats partial unification should work for Either in Scala 2.13+" in  {
-    import cats.instances.either._
-    import cats.syntax.functor._
+  "cats partial unification should work for Either in Scala 2.13+" in {
+    import cats.instances.either.*
+    import cats.syntax.functor.*
 
     val either: Either[String, Int] = Right(123)
-    either.fmap(_ + 1) should be (Right(124))
+    either.fmap(_ + 1).should(be(Right(124)))
   }
 
   "Functor impl for Scalactic Or should work with custom implementation" in {
     import cats.Functor
-    import cats.syntax.functor._
-    import org.scalactic._
+    import org.scalactic.*
 
     // Scalactic Or is left biased so compiler cannot automatically use partial unification
 
-    type Q[A] = Or[A, _]
+    type Q[A] = Or[A, ?]
 
     implicit val functorQ: Functor[Q] = new Functor[Q] {
       override def map[A, B](fa: Q[A])(f: A => B): Q[B] = fa.map(f)
@@ -93,16 +92,19 @@ class FunctorsSpec extends AnyFreeSpec with Matchers {
     val o1: Q[String] = Good("Hello")
     val o2: Q[String] = Bad(One("BadMessage"))
 
-    o1.fmap(_.length) should be (Good(5))
-    o2.fmap(_.length) should be (Bad(One("BadMessage")))
+    assert(
+      (
+        functorQ.fmap(o1)(_.length),
+        functorQ.fmap(o2)(_.length)
+      ) === (Good(5), Bad(One("BadMessage")))
+    )
   }
 
   "Functor Impl for Scalactic Or with bad mapping" in {
     import cats.Functor
-    import cats.syntax.functor._
-    import org.scalactic._
+    import org.scalactic.*
 
-    type F[A] = Or[_, A]
+    type F[A] = Or[?, A]
 
     implicit val functorF: Functor[F] = new Functor[F] {
       override def map[A, B](fa: F[A])(f: A => B): F[B] = fa.badMap(f)
@@ -111,19 +113,25 @@ class FunctorsSpec extends AnyFreeSpec with Matchers {
     val o1: F[Every[String]] = Good("Hello")
     val o2: F[Every[String]] = Bad(One("BadMessage"))
 
-    o1.fmap(_.map(_.length)) should be (Good("Hello"))
-    o2.fmap(_.map(_.length)) should be (Bad(One(10)))
+    //    o1.fmap(_.map(_.length)).should(be (Good("Hello"))) // Doesn't work -> Some regression or feature change in latest version of cats
+    //    o2.fmap(_.map(_.length)).should(be (Bad(One(10))))
+    assert(
+      (
+        functorF.fmap(o1)(_.map(_.length)),
+        functorF.fmap(o2)(_.map(_.length))
+      ) === (Good("Hello"), Bad(One(10)))
+    )
   }
 
   "partial unification should not work for ContravariantFunctor which needs to fix Right type parameter" in {
-    import cats.syntax.contravariant._
-    import cats.instances.function._
+    import cats.syntax.contravariant.*
+    import cats.instances.function.*
 
     val func1 = (x: Int) => x.toDouble
     val func2 = (y: Double) => y.toString
 
     // Error:(128, 11) value contramap is not a member of Double => Double
-    //    func2.contramap(func1) should be (4.0)
+    //    func2.contramap(func1).should(be (4.0)
 
     // Workaround for partial unification
     type <=[B, A] = A => B
@@ -160,15 +168,15 @@ class FunctorsSpec extends AnyFreeSpec with Matchers {
     // where R is double
     // func2B =
     // Contravariant[G[String]].contramap[Double, Int](f)(func2B: G[String][Double])(func1: Int => Double): G[String][Int]
-    func3c(2) should be ("2.0")
+    func3c(2).should(be("2.0"))
   }
 
   "Contravariant functor with explicit functor mapping should work" in {
-    import cats.syntax.contravariant._
+    import cats.syntax.contravariant.*
     import cats.Contravariant
 
     type F[A] = A => String
-    val func1 = (x: Int) => x.toDouble
+    val func1            = (x: Int) => x.toDouble
     val func2: F[Double] = (y: Double) => y.toString
 
     implicit val contravariantFunctor: Contravariant[F] = new Contravariant[F] {
@@ -177,6 +185,6 @@ class FunctorsSpec extends AnyFreeSpec with Matchers {
 
     val func3 = func2.contramap(func1)
 
-    func3(2) should be ("2.0")
+    func3(2).should(be("2.0"))
   }
 }
