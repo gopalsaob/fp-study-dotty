@@ -1,8 +1,7 @@
 package exercises
 
-import freespec.*
-import matchers.should.Matchers
-import org.scalatest.*
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.freespec.AnyFreeSpecLike
 
 class OrderingsSpec extends AnyFreeSpecLike with Matchers {
 

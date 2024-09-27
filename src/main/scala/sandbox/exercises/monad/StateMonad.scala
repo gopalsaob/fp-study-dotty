@@ -5,8 +5,8 @@ import cats.data.IndexedStateT
 import scala.annotation.tailrec
 
 object StateMonad {
-  import State.*
   import cats.data.State
+  import cats.data.State.*
 
   def program: State[Int, (Int, Int, Int)] =
     for {

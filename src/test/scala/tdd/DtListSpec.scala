@@ -16,8 +16,14 @@ class DtListSpec extends AnyFreeSpecLike with Matchers {
         list.tail.head
       ) === (2, 1, 1, "two")
     )
-//    val s = list.tail.tail.head // compilation error
-//    println(s)
   }
+
+  "DtList should result in compilation error if head on empty list" in {
+    """
+      | val list = 1 +: "two" +: DTNil
+      | val s = list.tail.tail.head
+      |""".stripMargin shouldNot compile
+  }
+
 
 }
