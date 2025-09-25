@@ -6,8 +6,8 @@ object Example1 {
     extension (x: T) def <(y: T) = compare(x, y) < 0
     extension (x: T) def >(y: T) = compare(x, y) > 0
 
-  given intOrd: Ord[Int] with
-    def compare(x: Int, y: Int) =
+  given intOrd: Ord[Int]:
+    def compare(x: Int, y: Int): Int =
       if x < y then -1 else if x > y then +1 else 0
 
   given listOrd[T](using ord: Ord[T]): Ord[List[T]] with

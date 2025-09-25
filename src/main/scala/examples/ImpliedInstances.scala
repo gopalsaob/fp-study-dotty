@@ -36,6 +36,6 @@ object ImpliedInstances {
     println(implicitly[StringParser[Option[Int]]].parse(""))
     println(implicitly[StringParser[Option[Int]]].parse("21a"))
 
-    println(implicitly[StringParser[Option[Int]]](StringParser.optionParser[Int]).parse("42"))
+    println(summon[StringParser[Option[Int]]](using StringParser.optionParser[Int]).parse("42"))
   }
 }

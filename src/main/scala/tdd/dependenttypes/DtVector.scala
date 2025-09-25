@@ -1,7 +1,6 @@
 package tdd.dependenttypes
 
 import scala.Vector
-import scala.compiletime.ops.int.*
 
 case class DtVector[N <: Int, A](internalRep: Vector[A]):
   inline def size: N = valueOf[N]

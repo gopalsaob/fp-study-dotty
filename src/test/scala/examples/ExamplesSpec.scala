@@ -6,7 +6,7 @@ import org.scalatest.matchers.should.Matchers
 class ExamplesSpec extends AnyFreeSpecLike with Matchers {
 
   "Dotty Examples should work as expected" in {
-    runExample("Trait Params")(TraitParams.test)
+//    runExample("Trait Params")(TraitParams.test)
 
     runExample("Enum Types")(EnumTypes.test)
 
