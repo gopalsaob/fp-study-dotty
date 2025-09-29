@@ -1,6 +1,6 @@
 package mymacros
 
-import mymacros.inline.PowerCodeApproach2
+import mymacros.inline.PowerCodeInline1
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -11,7 +11,7 @@ class MacrosSpec extends AnyFreeSpec with Matchers {
   }
 
   "PowerCodeApproach2.powerMacro should work" in {
-    PowerCodeApproach2.power(2, 5) should be (32)
+    PowerCodeInline1.power(2, 5) should be (32)
   }
 
 }

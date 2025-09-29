@@ -1,6 +1,6 @@
 package mymacros.inline
 
-object PowerCodeApproach2 {
+object PowerCodeInline1 {
 
 //  inline def powerMacro(x: Double, n: Int): Double =
 //    ${ power('x, 'n) }
