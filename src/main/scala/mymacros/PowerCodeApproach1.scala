@@ -13,7 +13,7 @@ object PowerCodeApproach1 {
 
   /** If `n` is known, generate`'{ x * ... * x }` with`n` repetitions of `x` */
   private def powerCode(x: Expr[Double], n: Expr[Int])(using Quotes): Expr[Double] =
-    unrolledPowerCode(x, n.valueOrAbort)
+    unrolledPowerCode(x, n.valueOrAbort) // emits an error message if`n` is not a constant
 
   /**
    * Good practice.

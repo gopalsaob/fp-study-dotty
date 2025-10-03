@@ -15,8 +15,8 @@ object PowerCodeApproach2 {
    */
   def powerCode(x: Expr[Double], n: Expr[Int])(using Quotes): Expr[Double] =
     n.value match
-      case Some(m) => unrolledPowerCode(x, m) // statically known n
-      case None => '{ Math.pow(${ x }, ${ n }.toDouble) }
+      case Some(m) => unrolledPowerCode(x, m) // if n is a constant, i.e. statically known
+      case None => '{ Math.pow(${ x }, ${ n }.toDouble) } // n is not a constant, so can't use Macro, default to Math.pow function
 
   def unrolledPowerCode(x: Expr[Double], n: Int)(using Quotes): Expr[Double] =
     if n == 0 then '{ 1.0 }
